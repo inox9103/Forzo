@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#080808">
+<title>FORZO — Technology</title>
+<style>
+:root{--bg:#070707;--fg:#f4f4f0;--muted:#999;--line:#202020;--cyan:#9cf8ff;--max:1180px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:Inter,Arial,sans-serif;overflow-x:hidden;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+a{color:inherit;text-decoration:none}
+.video-bg{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3;opacity:.25;filter:brightness(.5) contrast(1.04);pointer-events:none}
+.video-shade{position:fixed;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(0,0,0,.78),rgba(0,0,0,.4) 40%,rgba(0,0,0,.95))}
+header{position:fixed;inset:0 0 auto;z-index:20;transition:.25s}
+header.scrolled{background:rgba(7,7,7,.86);border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+.nav{width:min(var(--max),calc(100% - 40px));height:74px;margin:auto;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:22px;font-weight:900;letter-spacing:.25em;text-shadow:0 0 16px rgba(156,248,255,.25)}
+.logo:after{content:"";display:block;width:70%;height:1px;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-size:11px;color:#aaa;text-transform:uppercase;letter-spacing:.12em}
+.nav-links a:hover{color:#fff}
+.ig{border:1px solid var(--line);padding:9px 13px;border-radius:5px}
+.menu{display:none;background:none;border:1px solid var(--line);color:#ddd;padding:8px 11px;border-radius:5px}
+.hero{width:min(var(--max),calc(100% - 40px));min-height:100vh;margin:auto;display:flex;align-items:center;padding:120px 0 80px}
+.hero-inner{max-width:850px}
+.kicker{font:10px ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:20px}
+h1{font-size:clamp(58px,9vw,116px);line-height:.88;letter-spacing:-.075em}
+.grad{background:linear-gradient(110deg,#fff 40%,#bafaff 72%,#b49dff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{max-width:590px;color:#aaa;line-height:1.8;font-size:16px;margin-top:28px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;padding:0 18px;height:45px;border:1px solid #303030;border-radius:5px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;transition:.2s}
+.primary{background:#f4f4f0;color:#080808}
+.primary:hover{box-shadow:0 0 28px rgba(156,248,255,.2);transform:translateY(-2px)}
+.ghost{background:rgba(255,255,255,.035)}
+section{width:min(var(--max),calc(100% - 40px));margin:auto;padding:105px 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:35px;margin-bottom:36px}
+h2{font-size:clamp(38px,5vw,64px);line-height:.95;letter-spacing:-.06em}
+.desc{max-width:420px;color:var(--muted);font-size:14px;line-height:1.8}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.card{min-height:265px;padding:24px;background:rgba(12,12,12,.82);border:1px solid var(--line);border-radius:7px;transition:.25s}
+.card:hover{border-color:#34575a;transform:translateY(-3px)}
+.num{color:#5d5d5d;font:10px ui-monospace,monospace}
+.card h3{font-size:22px;letter-spacing:-.03em;margin-top:75px}
+.card p{color:var(--muted);font-size:13px;line-height:1.7;margin-top:10px}
+.gallery{display:grid;grid-template-columns:1.4fr .8fr .8fr;grid-auto-rows:300px;gap:13px}
+.photo{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:7px;background:#0b0b0b}
+.photo:first-child{grid-row:span 2}
+.photo img{width:100%;height:100%;object-fit:cover;display:block;opacity:.88;transition:.45s}
+.photo:hover img{transform:scale(1.035);opacity:1}
+.photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.75))}
+.caption{position:absolute;left:19px;bottom:17px;z-index:2}
+.caption small{font:9px ui-monospace,monospace;color:var(--cyan);letter-spacing:.14em}
+.caption h3{margin-top:5px;font-size:20px}
+.meta{display:flex;justify-content:space-between;color:#626262;font:9px ui-monospace,monospace;text-transform:uppercase}
+.article h3{margin-top:50px}
+.read{display:inline-block;margin-top:20px;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.contact{border:1px solid #274043;border-radius:8px;padding:62px 25px;text-align:center;background:rgba(10,10,10,.78)}
+.contact h2{max-width:720px;margin:auto}
+.contact p{max-width:520px;margin:18px auto 25px;color:var(--muted);font-size:14px;line-height:1.8}
+footer{width:min(var(--max),calc(100% - 40px));margin:auto;border-top:1px solid var(--line);padding:28px 0 42px;color:#666;font-size:11px;display:flex;justify-content:space-between}
+.reveal{opacity:0;transform:translateY(14px);transition:.55s}
+.reveal.visible{opacity:1;transform:none}
+img{-webkit-user-drag:none;pointer-events:none}
+@media(max-width:800px){.nav-links{display:none}.menu{display:block}.section-head{display:block}.desc{margin-top:16px}.grid{grid-template-columns:1fr}.gallery{grid-template-columns:1fr 1fr;grid-auto-rows:240px}}
+@media(max-width:520px){.nav,.hero,section,footer{width:calc(100% - 28px)}h1{font-size:56px}.gallery{grid-template-columns:1fr;grid-auto-rows:300px}.photo:first-child{grid-row:auto}footer{display:block}footer div+div{margin-top:8px}}
+</style>
+</head>
+<body>
+<div class="ambient-bg" aria-hidden="true"></div>
+
+
+<audio id="music" src="aud.mp3" autoplay loop preload="auto"></audio>
+<audio id="enterSound" src="enter.mp3" preload="auto"></audio>
+<div class="video-shade"></div>
+
+<header id="header">
+<nav class="nav">
+<a class="logo" href="#home">FORZO</a>
+<div class="nav-links">
+<a href="#technology">Technology</a>
+<a href="#work">Work</a>
+<a href="#insights">Insights</a>
+<a class="ig" href="https://www.instagram.com/nikhilz_2009/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+</div>
+<button class="menu" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact</button>
+</nav>
+</header>
+
+<main id="home">
+<section class="hero">
+<div class="hero-inner reveal">
+<div class="kicker">FORZO / Technology Company</div>
+<h1>Technology.<br><span class="grad">Made different.</span></h1>
+<p class="lead">FORZO builds modern digital products, intelligent systems and technology experiences designed with clarity, performance and purpose.</p>
+<div class="actions"><a class="btn primary" href="#technology">Explore FORZO</a><a class="btn ghost" href="#work">View work</a></div>
+</div>
+</section>
+
+<section id="technology">
+<div class="section-head reveal"><div><div class="kicker">01 / Technology</div><h2>Built for the<br>next move.</h2></div><p class="desc">Clean engineering, thoughtful interfaces and practical intelligence — combined into technology that feels simple and works hard.</p></div>
+<div class="grid">
+<article class="card reveal"><div class="num">01 — DIGITAL</div><h3>Digital Products</h3><p>Websites, applications and interfaces built to be fast, useful and memorable.</p></article>
+<article class="card reveal"><div class="num">02 — AI</div><h3>Intelligent Systems</h3><p>Automation and AI-powered experiences that make complex work feel effortless.</p></article>
+<article class="card reveal"><div class="num">03 — SYSTEMS</div><h3>Future Systems</h3><p>Scalable technical foundations designed for reliability, speed and long-term growth.</p></article>
+</div>
+</section>
+
+<section id="work">
+<div class="section-head reveal"><div><div class="kicker">02 / Selected work</div><h2>Ideas into<br>interfaces.</h2></div><p class="desc">A visual collection for FORZO concepts, products and experiments.</p></div>
+<div class="gallery">
+<article class="photo reveal"><img src="img1.png" alt="FORZO technology" loading="eager"><div class="caption"><small>FORZO / 001</small><h3>Technology</h3></div></article>
+<article class="photo reveal"><img src="img2.png" alt="FORZO systems" loading="lazy"><div class="caption"><small>FORZO / 002</small><h3>Systems</h3></div></article>
+<article class="photo reveal"><img src="img3.png" alt="FORZO interface" loading="lazy"><div class="caption"><small>FORZO / 003</small><h3>Interface</h3></div></article>
+<article class="photo reveal"><img src="img4.png" alt="FORZO innovation" loading="lazy"><div class="caption"><small>FORZO / 004</small><h3>Innovation</h3></div></article>
+</div>
+</section>
+
+<section id="insights">
+<div class="section-head reveal"><div><div class="kicker">03 / Insights</div><h2>Think.<br>Build.</h2></div><p class="desc">Technology notes and product ideas from the FORZO perspective.</p></div>
+<div class="grid">
+<article class="card article reveal"><div class="meta"><span>Technology</span><span>01</span></div><h3>The interface is changing.</h3><p>The next generation of software will make technology feel more natural and intelligent.</p><a class="read" href="#contact">Explore →</a></article>
+<article class="card article reveal"><div class="meta"><span>Engineering</span><span>02</span></div><h3>Speed is a feature.</h3><p>Performance changes the way people experience, understand and trust a product.</p><a class="read" href="#contact">Explore →</a></article>
+<article class="card article reveal"><div class="meta"><span>Future</span><span>03</span></div><h3>Make every detail count.</h3><p>Great technology is often the result of fewer distractions and better decisions.</p><a class="read" href="#contact">Explore →</a></article>
+</div>
+</section>
+
+<section id="contact">
+<div class="contact reveal">
+<div class="kicker">04 / FORZO</div>
+<h2>Let's build something worth remembering.</h2>
+<p>Technology, design and ideas — brought together under one name.</p>
+<a class="btn primary" href="https://www.instagram.com/nikhilz_2009/" target="_blank" rel="noopener noreferrer">Follow on Instagram ↗</a>
+</div>
+</section>
+</main>
+
+<footer><div>© <span id="year"></span> FORZO. All rights reserved.</div><div>Technology beyond ordinary.</div></footer>
+
+<script>
+(()=>{
+const header=document.getElementById("header"),video=document.getElementById("bgVideo"),music=document.getElementById("music"),enter=document.getElementById("enterSound");
+addEventListener("scroll",()=>header.classList.toggle("scrolled",scrollY>18),{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");io.unobserve(e.target)}}),{threshold:.08});
+document.querySelectorAll(".reveal").forEach(x=>io.observe(x));
+document.getElementById("year").textContent=new Date().getFullYear();
+video.muted=true;video.play().catch(()=>{});
+music.volume=.28;enter.volume=.48;
+let started=false;
+function startAudio(){
+ if(started)return;
+ started=true;
+ enter.currentTime=0;
+ enter.play().catch(()=>{});
+ music.play().catch(()=>{});
+}
+addEventListener("load",()=>{music.play().catch(()=>{});enter.play().catch(()=>{})},{once:true});
+["pointerdown","touchstart","click","keydown"].forEach(t=>addEventListener(t,startAudio,{once:true,passive:true}));
+
+["contextmenu","selectstart","dragstart","copy","cut"].forEach(t=>document.addEventListener(t,e=>e.preventDefault()));
+document.addEventListener("keydown",e=>{
+ const k=e.key.toLowerCase();
+ if((e.ctrlKey||e.metaKey)&&["+","-","=","0","c","x","u","s","p","a"].includes(k))e.preventDefault();
+},{passive:false});
+document.addEventListener("wheel",e=>{if(e.ctrlKey||e.metaKey)e.preventDefault()},{passive:false});
+["gesturestart","gesturechange","gestureend"].forEach(t=>document.addEventListener(t,e=>e.preventDefault(),{passive:false}));
+})();
+</script>
+</body>
+</html>
