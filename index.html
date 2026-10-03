@@ -38,7 +38,7 @@
       height:100%;
       object-fit:cover;
       z-index:-4;
-      filter:brightness(.32) saturate(1.15) contrast(1.08);
+      filter:brightness(.34) saturate(1.12) contrast(1.05); will-change:transform;
       pointer-events:none;
     }
     .video-overlay{
@@ -72,7 +72,7 @@
     }
     header.scrolled{
       background:rgba(3,3,4,.76);
-      backdrop-filter:blur(18px);
+      backdrop-filter:blur(10px);
       border-color:var(--line);
     }
     .nav{
@@ -233,7 +233,7 @@
     .hero-card{
       border:1px solid var(--line);
       background:rgba(8,8,10,.5);
-      backdrop-filter:blur(14px);
+      backdrop-filter:blur(8px);
       border-radius:20px;
       padding:28px;
       overflow:hidden;
@@ -246,7 +246,7 @@
       right:-90px;top:-90px;
       border-radius:50%;
       background:var(--accent);
-      filter:blur(80px);
+      filter:blur(45px);
       opacity:.14;
     }
     .terminal{
@@ -303,7 +303,7 @@
       border:1px solid var(--line);
       border-radius:16px;
       background:linear-gradient(145deg,rgba(20,20,23,.76),rgba(7,7,9,.52));
-      backdrop-filter:blur(14px);
+      backdrop-filter:blur(8px);
       position:relative;
       overflow:hidden;
       transition:.35s;
@@ -334,7 +334,7 @@
       right:-55px;bottom:-55px;
       border-radius:50%;
       background:var(--accent2);
-      filter:blur(45px);
+      filter:blur(28px);
       opacity:.13;
     }
 
@@ -403,7 +403,7 @@
       border:1px solid var(--line);
       border-radius:16px;
       background:rgba(8,8,10,.67);
-      backdrop-filter:blur(14px);
+      backdrop-filter:blur(8px);
       transition:.3s;
     }
     .article:hover{
@@ -447,7 +447,7 @@
         radial-gradient(circle at 80% 30%,rgba(0,240,255,.1),transparent 30%),
         radial-gradient(circle at 15% 80%,rgba(139,92,255,.12),transparent 35%),
         rgba(8,8,10,.68);
-      backdrop-filter:blur(15px);
+      backdrop-filter:blur(9px);
       text-align:center;
     }
     .cta h2{max-width:780px;margin:0 auto}
@@ -469,7 +469,7 @@
     .reveal{
       opacity:0;
       transform:translateY(28px);
-      transition:opacity .8s ease,transform .8s ease;
+      transition:opacity .55s ease,transform .55s ease;
     }
     .reveal.visible{
       opacity:1;
@@ -515,6 +515,7 @@
   </video>
   <div class="video-overlay"></div>
   <div class="noise"></div>
+  <audio id="bgMusic" src="aud.mp3" loop preload="metadata"></audio>
 
   <header id="header">
     <nav class="nav">
@@ -688,7 +689,7 @@
         <p>
           Let's turn the rough idea into a sharp digital product, intelligent system or technology experience.
         </p>
-        <a class="btn btn-primary" href="mailto:nikhilpython9103">nikhilpython9103@gmail.com</a>
+        <a class="btn btn-primary" href="mailto:hello@forzo.tech">hello@forzo.tech</a>
       </div>
     </section>
   </main>
@@ -707,23 +708,4 @@
 
     // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {threshold:.12});
-
-    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
-
-    // Current year
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Keep background video muted/autoplay friendly
-    const bgVideo = document.querySelector(".video-bg");
-    bgVideo.muted = true;
-    bgVideo.play().catch(() => {});
-  </script>
-</body>
-</html>
+      entries.forEach(entr
